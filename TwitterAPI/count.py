@@ -1,12 +1,16 @@
+# this file can count number of tweets that the user update by giving different search conditions
+
 import os
 import tweepy
 import requests, json
 
+#get user's info
 consumer = 'this is your consumer key'
 c_secret = "your consumer secret"
 token = "your access token"
 at_secret = "your access token secret"
 
+# get the user's name
 person = tweepy.OAuthHandle(consumer, c_secret)
 person.set_access_token(token, at_secret)
 
