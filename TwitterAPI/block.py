@@ -9,6 +9,7 @@ c_secret = "your consumer secret"
 token = "your access token"
 at_secret = "your access token secret"
 
+#get user's name
 person = tweepy.OAuthHandle(consumer, c_secret)
 person.set_access_token(token, at_secret)
 
