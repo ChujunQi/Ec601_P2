@@ -1,17 +1,16 @@
+#how to send a tweet
 import os
 import tweepy
 import requests, json
 
 #to get access API, use consumer key, consumer secret, access token, and access token secret
-#resource: https://iq.opengenus.org/post-image-twitter-api/
-
 consumer = 'this is your consumer key'
 c_secret = "your consumer secret"
 token = "your access token"
 at_secret = "your access token secret"
 
 
-
+# get user's info
 person = tweepy.OAuthHandle(consumer, c_secret)
 person.set_access_token(token, at_secret)
 api = tweepy.API(person, wait_on_rate_limit = True)
@@ -22,6 +21,7 @@ api.update_status("here is your content")
 media = open('your media path here', 'rb')
 c = media.read()
 
+#get image info
 send_media = { 'media': c, 'media_category': 'tweet_image'}
 
 base_url = 'https://api.twitter.com/'
@@ -32,12 +32,14 @@ auth_headers = {
     'Authorization': 'Basic {}'.format(b64_encoded_key),
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 }
+
+#get access 
 person_data = {'grant type': 'client_credentials'}
 person_resp = requests.post(url, headers = person_data)
 access_token = person_resp.json()['access_token']
 
 image = {'Authorization': 'Bearer {}'.format(access_token)}
-
+#upload image using the url
 url = 'https://upload.twitter.com/1.1/media/upload.json'
 
 
