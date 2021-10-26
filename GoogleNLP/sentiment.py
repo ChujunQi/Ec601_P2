@@ -22,7 +22,5 @@ def analyze_sentence(file):
     print_res(anno)
 
 
-# here is the file that you want to analysis
-result = analyze_sentence("this is the txt file name you want to check")
 
 
