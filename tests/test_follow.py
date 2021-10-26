@@ -15,13 +15,16 @@ at_secret = "your access token secret"
 person = tweepy.OAuthHandle(consumer, c_secret)
 person.set_access_token(token, at_secret)
 
+# get username
 api = tweepy.API(person)
-screen = "the screen_name that the user you want to check"
+screen = api.screen_name
 
 # get all followers
 all_f = tweepy.Cursor(api.followers, screen)
 
-u_id = "here is the user id that you want to check"
+# get user id
+getuser = api.get_user(screen)
+u_id = getuser.id_str()
 
 # test follower a user
 print("You have followed: ")
