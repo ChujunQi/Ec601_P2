@@ -3,40 +3,55 @@ import os
 import tweepy
 import requests, json
 
-#like/unlike a tweet
-url = "https://api.twitter.com/2/users//likes"
+#like a tweet, two methods: likeTweet and simpleLike
+def likeTweet(person, likeID):
+    api = tweepy.API(person)
+    like = api.create_favorite("likeID")
+    print(f"you like {likeID}'s tweet ", likeID)
 
-payload = "// Replace tweet-id-you-want-to-like with the ID you wish to like\n{\n    \"tweet_id\": \"tweet-id-you-want-to-like\"\n}"
-headers = {}
 
-response = requests.request("POST", url, headers=headers, data=payload)
-#response = requests.request("DELETE", url, headers=headers, data=payload)
+def simpleLike(users, tweet_id, tweet_id_like):
+    url = "https://api.twitter.com/2/users//likes"
 
-print(response.text)
+    payload = "// Replace tweet_id_like with the ID you wish to like\n{\n    \"tweet_id\": \"tweet_id_like\"\n}"
+    headers = {}
 
-#like a tweet
-#get user's info
-consumer = 'this is your consumer key'
-c_secret = "your consumer secret"
-token = "your access token"
-at_secret = "your access token secret"
+    response = requests.request("DELETE", url, headers=headers, data=payload)
 
-person = tweepy.OAuthHandle(consumer, c_secret)
-person.set_access_token(token, at_secret)
+    print(response.text)
 
-#this will create a "like" 
-api = tweepy.API(person)
-t = api.create_favorite("this is id")
+
 
 #unlike a tweet
-t_1 = api.destroy_favorite("this is id")
+def unlikeTweet(person, unlikeID):
+    api = tweepy.API(person)
+    unlike = api.destroy_favorite("unlikeID")
+    print(f"you like {unlikeID}'s tweet ", unlikeID)
 
-#get a user's like list, print all tweets that the user likes from one list
-screen = "this is screen name"
-#get all "like" tweets
-f = api.favorites(screen)
-for i in f:
-    print(status.user.screen)
+def simpleUnlike(users, tweet_id, tweet_id_like):
+    url = "https://api.twitter.com/2/users//likes"
+
+    payload = "// Replace tweet_id_like with the ID you wish to unlike\n{\n    \"tweet_id\": \"tweet_id_like\"\n}"
+    headers = {}
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
 
 
+#get a user's like list, two methods to get: likeList and getLiked
+def likeList(screen):
+    likes = api.favorites(screen)
+    for i in likes:
+        print(status.user.screen)
+
+
+def getLiked(users):
+    url = "https://api.twitter.com/2/users//liked_tweets"
+
+    payload = {}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    print(response.text)
 
