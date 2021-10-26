@@ -14,18 +14,23 @@ at_secret = "your access token secret"
 api = twitter.Api(consumer_key = consumer, consumer_secret = c_secret, 
                     access_token_key = token, access_token_secret = at_secret)
 
-# delete function to delete tweets
-def delete(t):
-    api.DestroyStatus(t)
+#delete function to delete tweets
+def delete(tweets):
+    delete_tweet = []
+    for i in tweets:
+        delete_tweet.append(e["tweet"]["id_str"])
 
-# get tweets in a list
-myTweet = None
-with open('editedTweet.json') as json_file:
-    myTweet = json.load(json_file)
+    for things in delete_tweet:
+        api.DestroyStatus(things)
 
-delete_tweet = []
-for i in myTweet:
-    delete_tweet.append(e["tweet"]["id_str"])
 
-for things in myTweet:
-    delete(things)
+def main():
+    # get all the tweets 
+    myTweet = None
+    with open('editedTweet.json') as json_file:
+        myTweet = json.load(json_file)
+
+    delete(myTweet)
+
+if __name__ == '__main__':
+    main()
