@@ -1,5 +1,6 @@
 import deleteTweet as DT 
-
+import twitter
+import json
 
 consumer = 'this is your consumer key'
 c_secret = "your consumer secret"
